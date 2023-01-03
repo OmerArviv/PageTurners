@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const Product = require('./product').schema;
+const Book = require('./book').schema;
 
 var schema = mongoose.Schema({
-    products: [{             // List of all products - include quantity
-        prod: {              // The product
-            type: Product,
+    books: [{             // List of all Books
+        prod: {              // The Book
+            type: Book,
             required: true
         },
         qty: {              // Quantity

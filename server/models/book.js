@@ -5,7 +5,7 @@ var schema = mongoose.Schema({
         type: String,
         required: true
     },
-    description: {
+    summary: {
         type: String,
         required: true,
         unique: true
@@ -17,6 +17,10 @@ var schema = mongoose.Schema({
     image: {
         type: String,
         required: true
+    },
+    author: {
+        type: String,
+        required: true
     }
 }, {
     versionKey: false,
@@ -24,4 +28,4 @@ var schema = mongoose.Schema({
 }
 );
 
-module.exports = mongoose.model("Product", schema, "Product");
+module.exports = mongoose.model("Book", schema, "Book");

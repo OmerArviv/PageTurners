@@ -17,9 +17,9 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }))
 
 // Routers
-const productsRoute = require('./routes/products');
+const booksRoute = require('./routes/books');
 
-app.use('/products', productsRoute)
+app.use('/books', booksRoute)
 
 mongoose.connect(`mongodb${process.env.prod}://${process.env.dbUser}:${process.env.dbPass}@${process.env.dbHost}`)
 http.listen(process.env.PORT || 5000);

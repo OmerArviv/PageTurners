@@ -1,19 +1,19 @@
-const Product = require('../models/product');
+const Book = require('../models/book');
 const Order = require('../models/order');
 
-// Get all products
-const getAllProducts = async (req, res) => {
+// Get all books
+const getAllBooks = async (req, res) => {
     try {
-        const products = await Product.find();
-        res.status(200).json(products);
+        const books = await Book.find();
+        res.status(200).json(books);
     }
     catch (err) {
         res.status(500).json({ "error": err });
     }
 }
 
-const getProductByName = async (req, res) => {
-    const prod = await Product.findOne({
+const getBookByName = async (req, res) => {
+    const prod = await Book.findOne({
         "name": req.params.name
     })
     res.status(200).json(prod);
@@ -21,22 +21,23 @@ const getProductByName = async (req, res) => {
 
 const saveNewOrder = async (req, res) => {
     const orders = req.body
-    const allProducts = []
+    const allBooks = []
     let totalCost = 0;
     orders.forEach(element => {
         const el = JSON.parse(element)
-        const newProduct = new Product({
+        const newBook = new Book({
             name: el.name,
-            description: el.description,
+            summary: el.summary,
             price: el.price,
             image: el.image,
+            author: el.author
         })
-        allProducts.push({ prod: newProduct, qty: el.qty })
+        allBooks.push({ prod: newBook, qty: el.qty })
         totalCost = totalCost + (el.price * el.qty)
     });
 
     const newOrder = new Order({
-        products: allProducts
+        products: allBooks
         totalcost: totalCost
     })
 
@@ -52,7 +53,7 @@ const saveNewOrder = async (req, res) => {
 }
 
 module.exports = {
-    getAllProducts,
-    getProductByName,
+    getAllBooks,
+    getBookByName,
     saveNewOrder
 }
