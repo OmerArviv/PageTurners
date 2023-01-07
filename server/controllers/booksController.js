@@ -12,7 +12,7 @@ const getAllBooks = async (req, res) => {
     }
 }
 
-const getBookByName = async (req, res) => {
+const getBookByTitle = async (req, res) => {
     try {
         const book = await Book.findOne({ title: req.params.title });
         res.status(200).json(book);
@@ -59,6 +59,6 @@ const saveNewOrder = async (req, res) => {
 
 module.exports = {
     getAllBooks,
-    getBookByName,
+    getBookByTitle,
     saveNewOrder
 }
