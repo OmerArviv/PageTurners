@@ -13,7 +13,6 @@ const getAllBooks = async (req, res) => {
 }
 
 const getBookByName = async (req, res) => {
-    console.log("test")
     try {
         const book = await Book.findOne({ title: req.params.title });
         res.status(200).json(book);

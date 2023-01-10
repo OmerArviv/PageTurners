@@ -1,0 +1,22 @@
+import React, { Component } from 'react'
+import Card from 'react-bootstrap/Card';
+import './Book.css';
+
+export default class Book extends Component {
+    render() {
+        return (
+            <div>
+                <Card className="card">
+                    <Card.Img src={this.props.book.image} className="card_image" />
+                    <Card.Body>
+                        <Card.Title>{this.props.book.title}</Card.Title>
+                        <Card.Text>
+                            {this.props.book.price}  ₪ <br />
+                            written by: {this.props.book.author}
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </div>
+        )
+    }
+}
