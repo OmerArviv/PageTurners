@@ -30,19 +30,21 @@ const saveNewOrder = async (req, res) => {
         const el = JSON.parse(element)
         const newBook = new Book({
             title: el.title,
-            summary: el.summary,
             price: el.price,
             image: el.image,
             author: el.author
         })
         allBooks.push({ prod: newBook, qty: el.qty })
         totalCost = totalCost + (el.price * el.qty)
+        console.log(newBook)
     });
 
     const newOrder = new Order({
-        products: allBooks,
+        books: allBooks,
         totalcost: totalCost
     })
+
+    console.log(newOrder)
 
     try {
         await newOrder.save();

@@ -23,6 +23,7 @@ class PostList extends Component {
     }
     render() {
         const { posts } = this.state
+        const { onAddItem } = this.props
 
         return (
             <div className='container'>
@@ -32,6 +33,7 @@ class PostList extends Component {
                             <div key={post.title} className="ListItem">
                                 <Book
                                     book={post}
+                                    onAddItem={onAddItem}
                                 />
                             </div>
                         ) :
