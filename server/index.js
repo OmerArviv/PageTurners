@@ -23,3 +23,4 @@ app.use('/books', booksRoute)
 
 mongoose.connect(`mongodb${process.env.prod}://${process.env.dbUser}:${process.env.dbPass}@${process.env.dbHost}`)
 http.listen(process.env.PORT || 5000);
+mongoose.set('strictQuery', false);

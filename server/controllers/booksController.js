@@ -13,10 +13,13 @@ const getAllBooks = async (req, res) => {
 }
 
 const getBookByName = async (req, res) => {
-    const prod = await Book.findOne({
-        "name": req.params.name
-    })
-    res.status(200).json(prod);
+    try {
+        const book = await Book.findOne({ title: req.params.title });
+        res.status(200).json(book);
+    }
+    catch (err) {
+        res.status(500).json({ "error": err });
+    }
 }
 
 const saveNewOrder = async (req, res) => {
@@ -26,7 +29,7 @@ const saveNewOrder = async (req, res) => {
     orders.forEach(element => {
         const el = JSON.parse(element)
         const newBook = new Book({
-            name: el.name,
+            title: el.title,
             summary: el.summary,
             price: el.price,
             image: el.image,
@@ -37,7 +40,7 @@ const saveNewOrder = async (req, res) => {
     });
 
     const newOrder = new Order({
-        products: allBooks
+        products: allBooks,
         totalcost: totalCost
     })
 

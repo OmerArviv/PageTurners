@@ -1,14 +1,9 @@
 const mongoose = require('mongoose')
 
 var schema = mongoose.Schema({
-    name: {
+    title: {
         type: String,
         required: true
-    },
-    summary: {
-        type: String,
-        required: true,
-        unique: true
     },
     price: {
         type: Number,

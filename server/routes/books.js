@@ -6,7 +6,7 @@ router.route('/')
     .get(booksController.getAllBooks)
     .post(booksController.saveNewOrder)
 
-router.route('/p/:name')
+router.route('/p/:title')
     .get(booksController.getBookByName)
 
 module.exports = router;
