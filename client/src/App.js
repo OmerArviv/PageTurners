@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from './components/Header';
 import PostList from './components/PostList';
 import Basket from './components/Basket';
+import LoginPage from "./pages/Login/LoginPage";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
   return (
     <div>
       <Header></Header>
+      <LoginPage />
       <PostList onAddItem={onAddItem} />
       <Basket
         onRemoveItem={onRemoveItem}
