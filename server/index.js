@@ -56,9 +56,10 @@ const addBooks = (query, numToAdd) => {
                     break;
                 }
 
-                if (books[i].author_name && books[i].title && books[i].isbn && await Book.findOne({ "title": books[i].title }) == null) {
+                if (books[i].author_name && books[i].title && books[i].publisher && books[i].publisher[0] && books[i].publisher[0].length > 0 && books[i].isbn && await Book.findOne({ "title": books[i].title }) == null) {
                     const newBook = new Book({
                         author: books[i].author_name[0],
+                        publisher: books[i].publisher[0],
                         title: books[i].title,
                         price: Math.floor(Math.random() * (80 - 40) + 40),
                         image: `https://covers.openlibrary.org/b/isbn/${books[i].isbn[0]}-M.jpg`,
@@ -88,9 +89,11 @@ const initDbAndStart = async () => {
             if (count == 0) {
                 // Go over the alphabet and insert 100 random books
                 let alphaNum = 0;
-                while (await Book.countDocuments({}).exec() < 100) {
-                    await addBooks(String.fromCharCode(97 + alphaNum), 100);
+                let currentCount = 0;
+                while (currentCount < 100) {
+                    await addBooks(String.fromCharCode(97 + alphaNum), 100 - currentCount);
                     alphaNum = alphaNum + 1;
+                    currentCount = await Book.countDocuments({}).exec();
                 }
             }
             startListen();
