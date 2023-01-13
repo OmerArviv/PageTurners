@@ -32,7 +32,8 @@ const saveNewOrder = async (req, res) => {
             title: el.title,
             price: el.price,
             image: el.image,
-            author: el.author
+            author: el.author,
+            publisher: el.publisher
         })
         allBooks.push({ prod: newBook, qty: el.qty })
         totalCost = totalCost + (el.price * el.qty)

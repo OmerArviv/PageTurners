@@ -16,6 +16,10 @@ var schema = mongoose.Schema({
     author: {
         type: String,
         required: true
+    },
+    publisher: {
+        type: String,
+        required: true
     }
 }, {
     versionKey: false,
