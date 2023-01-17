@@ -57,8 +57,6 @@ const LoginPage = () => {
             }
         }).then((data) => {
             authCtx.login(data.idToken);
-            // until routes will be, just show success message (after that, delete alert("Login succeeded"))!
-            alert("Login succeeded")
             // history.replace('/');
         }).catch(err => {
             alert(err.message);
