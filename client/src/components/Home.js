@@ -23,7 +23,6 @@ function Home() {
         }
     }
 
-
     const onRemoveItem = (book) => {
         const exist = CartItems.find(x => x.title === book.title)
         if (exist.qty === 1) {

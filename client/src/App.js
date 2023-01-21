@@ -11,25 +11,19 @@ import AdminPage from "./pages/Admin/AdminPage";
 
 function App() {
 
-    const authCtx = useContext(AuthContext);
-    const isLogged = authCtx.isLoggedIn;
 
-    return (
-        <Router>
-            <Header></Header>
-            {
-                !isLogged &&
-                <LoginPage />
-            }
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/book/:title" element={<BookDetails />} />
-                <Route path="/admin" element={<AdminPage/>} />
-            </Routes>
-        </Router>
+  return (
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/book/:title" element={<BookDetails />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+    </Router>
 
 
-    );
+  );
 }
 
 export default App;
