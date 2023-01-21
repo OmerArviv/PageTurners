@@ -1,17 +1,6 @@
 .container {
-    width: 100%;
+    width: 70%;
     margin-left: 20px;
     max-width: 200px;
-    width: 100%;
     float: left;
-}
-
-.ListItem {
-    max-width: 200px;
-    height: 500px;
-    float: left;
-    margin: 20px;
-    border: 2px solid;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: azure;
 }

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const AuthContext = React.createContext({
     token: '',
@@ -35,5 +35,3 @@ export const AuthContextProvider = (props) => {
 }
 
 export default AuthContext;
-
-
