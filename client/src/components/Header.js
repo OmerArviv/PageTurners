@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -6,7 +6,8 @@ import LoginButton from "./LoginButton/LoginButton";
 import './Header.css';
 import AuthContext from "../store/auth-context";
 import LogoutButton from "./LogoutButton/LogoutButton";
-import {LinkContainer} from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const authCtx = useContext(AuthContext);
@@ -26,7 +27,7 @@ const Header = () => {
                     />{' '}
                     PageTurners
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
@@ -38,17 +39,17 @@ const Header = () => {
                                 <Nav.Link>Admin</Nav.Link>
                             </LinkContainer>
                         }
-                    </Nav>
+                    </Nav >
                     <Nav>
                         {
                             isLogged
-                                ? <LogoutButton/>
-                                : <LoginButton/>
+                                ? <LogoutButton />
+                                : <Link to={`/login`}><LoginButton /></Link>
                         }
                     </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+                </Navbar.Collapse >
+            </Container >
+        </Navbar >
     );
 }
 

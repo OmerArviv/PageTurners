@@ -3,6 +3,7 @@ import { useState, useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import { useNavigate } from 'react-router-dom';
 import classes from './LoginPage.module.css';
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
     const emailInputRef = useRef();
@@ -90,7 +91,8 @@ const LoginPage = () => {
                     }).then((data) => {
                         authCtx.login(token, enteredEmail, data.role);
 
-                    })}
+                    })
+                }
                 // history.replace('/');
             }).catch(err => {
                 alert(err.message);
@@ -129,6 +131,7 @@ const LoginPage = () => {
                     >
                         {isLogin ? 'Create new account' : 'Login with existing account'}
                     </button>
+                    <Link to={"/"} className="back-button">Back to homepage</Link>
                 </div>
             </form>
         </section>
