@@ -52,12 +52,10 @@ class PostList extends Component {
                                             <Card.Img href={"#" + post.title} onClick={() => this.openModal(post)} src={post.image} className="card_image" />
                                             <Card.Body className='card-body'>
                                                 <Card.Title href={"#" + post.title} onClick={() => this.openModal(post)}>{post.title}</Card.Title>
-                                                <Card.Text>
-                                                    {post.price}  ₪ <br />
-                                                    Written by: {post.author}
+                                                <Card.Text className="card-text">
+                                                    {post.price} ₪
                                                 </Card.Text>
                                                 <Button className='btn_addtocart' onClick={() => onAddItem(post)}>Add to Cart</Button>
-                                                <br />
                                             </Card.Body>
                                         </Card>
                                     </div>
@@ -66,40 +64,42 @@ class PostList extends Component {
                             null
                     }
                 </Row>
-                {product && (
-                    <Modal isOpen={true} onRequestClose={this.closeModal}>
-                        <Zoom>
-                            <button className="close-modal" onClick={this.closeModal}>
-                                x
-                            </button>
-                            <div className="product-details">
-                                <img src={product.image.replace("-M.jpg", "-L.jpg")} alt={product.title}></img>
-                                <p>
-                                    <strong>{product.title}</strong>
-                                </p>
-                                <p>
-                                    Written by: {product.author}
-                                </p>
-                                <p>
-                                    Published by: {product.publisher}
-                                </p>
-                                <div className="product-price">
-                                    <div>{product.price}₪</div>
-                                    <button
-                                        className="button primary"
-                                        onClick={() => {
-                                            onAddItem(product);
-                                            this.closeModal();
-                                        }}
-                                    >
-                                        Add To Cart
-                                    </button>
+                {
+                    product && (
+                        <Modal isOpen={true} onRequestClose={this.closeModal}>
+                            <Zoom>
+                                <button className="close-modal" onClick={this.closeModal}>
+                                    x
+                                </button>
+                                <div className="product-details">
+                                    <img src={product.image.replace("-M.jpg", "-L.jpg")} alt={product.title}></img>
+                                    <p>
+                                        <strong>{product.title}</strong>
+                                    </p>
+                                    <p>
+                                        Written by: {product.author}
+                                    </p>
+                                    <p>
+                                        Published by: {product.publisher}
+                                    </p>
+                                    <div className="product-price">
+                                        <div>{product.price}₪</div>
+                                        <button
+                                            className="button primary"
+                                            onClick={() => {
+                                                onAddItem(product);
+                                                this.closeModal();
+                                            }}
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </Zoom>
-                    </Modal>
-                )}
-            </div>
+                            </Zoom>
+                        </Modal>
+                    )
+                }
+            </div >
         )
     }
 }
