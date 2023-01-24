@@ -23,7 +23,7 @@ const getBookByTitle = async (req, res) => {
 }
 
 const saveNewOrder = async (req, res) => {
-    const orders = req.body
+    const orders = req.body.orderData
     const allBooks = []
     let totalCost = 0;
     orders.forEach(element => {
@@ -42,7 +42,8 @@ const saveNewOrder = async (req, res) => {
 
     const newOrder = new Order({
         books: allBooks,
-        totalcost: totalCost
+        totalcost: totalCost,
+        user: req.body.user
     })
 
     console.log(newOrder)
