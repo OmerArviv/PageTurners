@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import { useNavigate } from 'react-router-dom';
+import './LoginPage.css';
 import classes from './LoginPage.module.css';
 import { Link } from "react-router-dom";
 
@@ -100,41 +101,43 @@ const LoginPage = () => {
     }
 
     return (
-        <section className={classes.auth}>
-            <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
-            <form onSubmit={submitHandler}>
-                <div className={classes.control}>
-                    <div className={classes.labelDiv}>
-                        <label htmlFor='email'>Email</label>
+        <div className="login-parent">
+            <section className={classes.auth}>
+                <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+                <form onSubmit={submitHandler}>
+                    <div className={classes.control}>
+                        <div className={classes.labelDiv}>
+                            <label htmlFor='email'>Email</label>
+                        </div>
+                        <div className={classes.inputDiv}>
+                            <input type='email' id='email' required ref={emailInputRef} />
+                        </div>
                     </div>
-                    <div className={classes.inputDiv}>
-                        <input type='email' id='email' required ref={emailInputRef} />
+                    <div className={classes.control}>
+                        <div className={classes.labelDiv}>
+                            <label htmlFor='password'>Password</label>
+                        </div>
+                        <div className={classes.inputDiv}>
+                            <input type='password' id='password' minLength="7" required ref={passwordInputRef} />
+                        </div>
                     </div>
-                </div>
-                <div className={classes.control}>
-                    <div className={classes.labelDiv}>
-                        <label htmlFor='password'>Password</label>
+                    <div className={classes.actions}>
+                        {!isLoading && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
+                        {
+                            isLoading && <p> Loading ... </p>
+                        }
+                        <button
+                            type='button'
+                            className={classes.toggle}
+                            onClick={switchAuthModeHandler}
+                        >
+                            {isLogin ? 'Create new account' : 'Login with existing account'}
+                        </button>
                     </div>
-                    <div className={classes.inputDiv}>
-                        <input type='password' id='password' minLength="7" required ref={passwordInputRef} />
-                    </div>
-                </div>
-                <div className={classes.actions}>
-                    {!isLoading && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
-                    {
-                        isLoading && <p> Loading ... </p>
-                    }
-                    <button
-                        type='button'
-                        className={classes.toggle}
-                        onClick={switchAuthModeHandler}
-                    >
-                        {isLogin ? 'Create new account' : 'Login with existing account'}
-                    </button>
-                    <Link to={"/"} className="back-button">Back to homepage</Link>
-                </div>
-            </form>
-        </section>
+                </form>
+            </section>
+            <Link to={"/"} className="login-back-button">Back to homepage</Link>
+        </div>
     );
 };
 
