@@ -1,7 +1,7 @@
 import React from "react";
-import {useState, useRef, useContext} from 'react';
+import { useState, useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import classes from './LoginPage.module.css';
 
 const LoginPage = () => {
@@ -45,22 +45,32 @@ const LoginPage = () => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-            setIsLoading(false);
-            if (res.ok) {
-                return res.json();
-            } else {
-                return res.json().then((data) => {
-                    let errorMessage = 'Auth failed';
+                setIsLoading(false);
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    return res.json().then((data) => {
+                        let errorMessage = 'Auth failed';
 
-                    throw new Error(errorMessage);
-                });
-            }
-        }).then((data) => {
-            authCtx.login(data.idToken);
-            // history.replace('/');
-        }).catch(err => {
-            alert(err.message);
-        });
+                        throw new Error(errorMessage);
+                    });
+                }
+            }).then((data) => {
+                authCtx.login(data.idToken, enteredEmail);
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        email: enteredEmail
+                    })
+                }
+
+                fetch('http://localhost:5000/users/', requestOptions);
+                // history.replace('/');
+            }).catch(err => {
+                alert(err.message);
+            });
     }
 
     return (
@@ -72,7 +82,7 @@ const LoginPage = () => {
                         <label htmlFor='email'>Email</label>
                     </div>
                     <div className={classes.inputDiv}>
-                        <input type='email' id='email' required ref={emailInputRef}/>
+                        <input type='email' id='email' required ref={emailInputRef} />
                     </div>
                 </div>
                 <div className={classes.control}>
@@ -80,7 +90,7 @@ const LoginPage = () => {
                         <label htmlFor='password'>Password</label>
                     </div>
                     <div className={classes.inputDiv}>
-                        <input type='password' id='password' minLength="7" required ref={passwordInputRef}/>
+                        <input type='password' id='password' minLength="7" required ref={passwordInputRef} />
                     </div>
                 </div>
                 <div className={classes.actions}>
