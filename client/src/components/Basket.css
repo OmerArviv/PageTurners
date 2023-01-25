@@ -1,8 +1,8 @@
 .CartItems {
     position: absolute;
     right: 0;
-    width: 20%;
-    margin: 20px;
+    width: 20vw;
+    margin: 50px;
     padding: 20px;
     border: 2px solid;
     height: auto;

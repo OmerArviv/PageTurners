@@ -29,6 +29,7 @@ function BookDetails() {
                 <h2 className="book-name">{data.title}</h2>
                 <p className="book-author">Author: {data.author}</p>
                 <p className="book-price">Price: ${data.price}</p>
+                <p className="book-publisher">Publisher: {data.publisher}</p>
                 <Link to={"/"} className="back-button">Back to homepage</Link>
             </div>
         </div>

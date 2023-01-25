@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
@@ -29,19 +29,62 @@ class PostList extends Component {
     componentDidMount() {
         axios.get("http://localhost:5000/books/")
             .then(res => {
-                this.setState({ posts: res.data })
+                setPosts(res.data);
+                setFilteredPosts(res.data);
             })
             .catch(error => {
                 console.log(error)
             })
     }
     render() {
+
+        const handleFilter = () => {
+            let filtered = posts;
+            if (maxPrice) {
+                filtered = filtered.filter(post => post.price <= maxPrice);
+            }
+            if (author) {
+                filtered = filtered.filter(post => post.author.toLowerCase().includes(author.toLowerCase()));
+            }
+            if (publisher) {
+                filtered = filtered.filter(post => post.publisher.toLowerCase().includes(publisher.toLowerCase()));
+            }
+            setFilteredPosts(filtered);
+        }
+
         const posts = this.state.posts
         const { onAddItem } = this.props
         const product = this.state.product;
 
         return (
             <div className='container'>
+                <div className='postlist-filters'>
+                    <span className='filter-label'>Max Price</span>
+                    <input
+                        className='postlist-filter'
+                        type="text"
+                        name="maxPrice"
+                        value={maxPrice}
+                        onChange={e => setMaxPrice(e.target.value)}
+                    ></input>
+                    <span className='filter-label'>Author</span>
+                    <input
+                        className='postlist-filter'
+                        type="text"
+                        name="author"
+                        value={author}
+                        onChange={e => setAuthor(e.target.value)}
+                    ></input>
+                    <span className='filter-label'>Publisher</span>
+                    <input
+                        className='postlist-filter'
+                        type="text"
+                        name="publisher"
+                        value={publisher}
+                        onChange={e => { setPublisher(e.target.value) }}
+                    ></input>
+                    <button onClick={handleFilter}>Filter</button>
+                </div>
                 <Row md={1} lg={2} xl={3} xxl={4} className="g-1">
                     {
                         posts.length ?
@@ -105,4 +148,3 @@ class PostList extends Component {
 }
 
 export default PostList
-
