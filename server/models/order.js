@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Book = require('./book').schema;
+const User = require('./user').schema;
 
 var schema = mongoose.Schema({
     books: [{             // List of all Books
@@ -14,6 +15,10 @@ var schema = mongoose.Schema({
     }],
     totalcost: {
         type: Number,
+        required: true
+    },
+    user: {
+        type: User,
         required: true
     }
 }, {

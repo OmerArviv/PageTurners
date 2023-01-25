@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import PostList from './PostList';
 import Basket from './Basket';
+import AuthContext from '../store/auth-context';
 
 function Home() {
 
     const [CartItems, setCartItems] = useState([]);
+    const authCtx = useContext(AuthContext);
 
     const onAddItem = (book) => {
         console.log("got into add item")
@@ -42,11 +44,38 @@ function Home() {
         )
 
         const requestOptions = {
-            method: 'POST',
+            method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            mode: 'cors',
-            body: JSON.stringify(orderData)
+            mode: 'cors'
         }
+
+        fetch("http://localhost:5000/users/getUser/" + authCtx.email, requestOptions).then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                return res.json().then((data) => {
+                    let errorMessage = 'Auth failed';
+
+                    throw new Error(errorMessage);
+                });
+            }
+        }).then((data) => {
+            console.log(data);
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                mode: 'cors',
+                body: JSON.stringify({
+                    orderData: orderData,
+                    user: data
+                })
+            }
+
+            fetch('http://localhost:5000/books/', requestOptions);
+            // history.replace('/');
+        }).catch(err => {
+            alert(err.message);
+        });
 
         const response = await fetch('http://localhost:5000/books/', requestOptions);
         const data = await response.json();
