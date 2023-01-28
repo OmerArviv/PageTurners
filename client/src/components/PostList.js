@@ -8,7 +8,7 @@ import './PostList.css';
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 
-class PostList extends Component {
+const PostList = (props) => {
 
     openModal = (product) => {
         this.setState({ product: product });
@@ -26,19 +26,8 @@ class PostList extends Component {
         }
     }
 
-    componentDidMount() {
-        axios.get("http://localhost:5000/books/")
-            .then(res => {
-                setPosts(res.data);
-                setFilteredPosts(res.data);
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-    render() {
-
-        const handleFilter = () => {
+    useEffect(() => {
+        function handleFilter() {
             let filtered = posts;
             if (maxPrice) {
                 filtered = filtered.filter(post => post.price <= maxPrice);
@@ -51,6 +40,20 @@ class PostList extends Component {
             }
             setFilteredPosts(filtered);
         }
+        handleFilter();
+    }, [maxPrice, author, publisher, posts])
+
+    componentDidMount() {
+        axios.get("http://localhost:5000/books/")
+            .then(res => {
+                setPosts(res.data);
+                setFilteredPosts(res.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+    render() {
 
         const posts = this.state.posts
         const { onAddItem } = this.props
@@ -65,7 +68,11 @@ class PostList extends Component {
                         type="text"
                         name="maxPrice"
                         value={maxPrice}
-                        onChange={e => setMaxPrice(e.target.value)}
+                        onChange={e => {
+                            if (!isNaN(e.target.value)) {
+                                setMaxPrice(e.target.value)
+                            }
+                        }}
                     ></input>
                     <span className='filter-label'>Author</span>
                     <input
@@ -83,7 +90,6 @@ class PostList extends Component {
                         value={publisher}
                         onChange={e => { setPublisher(e.target.value) }}
                     ></input>
-                    <button onClick={handleFilter}>Filter</button>
                 </div>
                 <Row md={1} lg={2} xl={3} xxl={4} className="g-1">
                     {
