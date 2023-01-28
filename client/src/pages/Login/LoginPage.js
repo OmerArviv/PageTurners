@@ -56,17 +56,41 @@ const LoginPage = () => {
                     });
                 }
             }).then((data) => {
-                authCtx.login(data.idToken, enteredEmail);
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    mode: 'cors',
-                    body: JSON.stringify({
-                        email: enteredEmail
-                    })
-                }
+                const token = data.idToken;
 
-                fetch('http://localhost:5000/users/', requestOptions);
+                if (!isLogin) {
+                    authCtx.login(token, enteredEmail);
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        mode: 'cors',
+                        body: JSON.stringify({
+                            email: enteredEmail
+                        })
+                    };
+
+                    fetch('http://localhost:5000/users/', requestOptions);
+                } else {
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' },
+                        mode: 'cors'
+                    }
+
+                    fetch("http://localhost:5000/users/getUser/" + enteredEmail, requestOptions).then(res => {
+                        if (res.ok) {
+                            return res.json();
+                        } else {
+                            return res.json().then((data) => {
+                                let errorMessage = 'Auth failed';
+
+                                throw new Error(errorMessage);
+                            });
+                        }
+                    }).then((data) => {
+                        authCtx.login(token, enteredEmail, data.role);
+
+                    })}
                 // history.replace('/');
             }).catch(err => {
                 alert(err.message);

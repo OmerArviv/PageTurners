@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useState, useContext } from 'react'
 import PostList from './PostList';
 import Basket from './Basket';
