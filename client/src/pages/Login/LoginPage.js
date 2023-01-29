@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useState, useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import './LoginPage.css';

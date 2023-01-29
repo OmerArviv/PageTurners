@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import PostList from './PostList';
 import Basket from './Basket';
 import AuthContext from '../store/auth-context';
@@ -10,7 +10,6 @@ function Home() {
     const authCtx = useContext(AuthContext);
 
     const onAddItem = (book) => {
-        console.log("got into add item")
         const exist = CartItems.find((x) => x.title === book.title);
         if (exist) {
             setCartItems(
@@ -36,7 +35,7 @@ function Home() {
 
     const sendOrder = async () => {
         const orderData = await CartItems.map(item => JSON.stringify(item))
-        console.log(orderData)
+        //console.log(orderData)
 
         setCartItems(
             CartItems.filter(x => false)
@@ -81,6 +80,16 @@ function Home() {
         console.log(data)
     }
 
+    useEffect(() => {
+        const storedItems = localStorage.getItem("cartItems");
+        if (storedItems !== "[]") {
+            setCartItems(JSON.parse(storedItems));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("cartItems", JSON.stringify(CartItems));
+    }, [CartItems]);
 
     return (
         <div className="main-container">
