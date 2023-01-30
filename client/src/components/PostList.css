@@ -1,6 +1,133 @@
 .container {
-    width: 70%;
-    margin-left: 20px;
-    max-width: 200px;
+    width: 80% !important;
     float: left;
+}
+
+.ListItem {
+    max-width: fit-content;
+    display: inline-block;
+}
+
+/* Product Details */
+.product-details {
+    vertical-align: middle;
+    display: inline;
+    text-align: center;
+    justify-content: center;
+}
+
+.product-details img {
+    max-height: 100vh;
+    max-width: 46rem;
+    margin: 0 auto;
+    display: flex;
+    border: 1px solid #ccc !important;
+    border-radius: 16px;
+}
+
+.product-details-description {
+    flex: 1 1;
+    margin: 1rem;
+}
+
+.close-modal {
+    position: absolute;
+    right: 1rem;
+    margin-top: -10px;
+    z-index: 1000;
+    background-color: white;
+    border: #f0f0f0;
+    border-radius: 0px;
+    text-decoration: none;
+    font-size: 26px;
+}
+
+.button {
+    padding: 1rem;
+    border: 0.1rem #c0c0c0 solid;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.button:hover {
+    border: 0.1rem #808080 solid;
+}
+
+.card {
+    align-items: center;
+    width: 250px;
+    height: 500px !important;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 2px 2px 5px #ccc;
+}
+
+.card_image {
+    height: 100%;
+    border: 1px solid #ccc !important;
+}
+
+.card_image:hover {
+    cursor: pointer;
+}
+
+.card-title {
+    color: #007bff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.card-title:hover {
+    cursor: pointer;
+}
+
+.card-text {
+    font-size: 18px;
+    color: gray;
+    margin-bottom: 20px;
+    text-align: center;
+    overflow: hidden;
+    max-height: 50px;
+    position: absolute;
+    bottom: 8px;
+    left: 20px;
+}
+
+.btn_addtocart {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    float: left;
+    width: 250px;
+    height: 800px;
+}
+
+.card-body {
+    height: 100%;
+}
+
+.ReactModal__Overlay {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.ReactModal__Content {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 97, 0.5);
+    inset: 80px !important;
+}
+
+.button.primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-decoration: none;
+    font-size: 14px;
 }
