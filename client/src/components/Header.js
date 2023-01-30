@@ -6,10 +6,12 @@ import LoginButton from "./LoginButton/LoginButton";
 import './Header.css';
 import AuthContext from "../store/auth-context";
 import LogoutButton from "./LogoutButton/LogoutButton";
+import {LinkContainer} from 'react-router-bootstrap'
 
 const Header = () => {
     const authCtx = useContext(AuthContext);
     const isLogged = authCtx.isLoggedIn;
+    const isAdmin = authCtx.isAdmin;
 
     return (
         <Navbar bg="light">
@@ -30,6 +32,12 @@ const Header = () => {
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#catalog">Catalog</Nav.Link>
                         <Nav.Link href="#about">About</Nav.Link>
+                        {
+                            isAdmin &&
+                            <LinkContainer to="/admin">
+                                <Nav.Link>Admin</Nav.Link>
+                            </LinkContainer>
+                        }
                     </Nav>
                     <Nav>
                         {

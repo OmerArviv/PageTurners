@@ -9,4 +9,7 @@ router.route('/')
 router.route('/getBook/:title')
     .get(booksController.getBookByTitle)
 
+router.route('/updateBook/:title')
+    .post(booksController.updateBookByTitle)
+
 module.exports = router;

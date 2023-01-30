@@ -22,6 +22,23 @@ const getBookByTitle = async (req, res) => {
     }
 }
 
+const updateBookByTitle = async (req, res) => {
+    const {newTitle, author, price} = req.body;
+
+    try {
+        await Book.updateOne({title: req.params.title}, {
+            title: newTitle,
+            author: author,
+            price: price
+        });
+        res.status(200).json({ "status": "Book details updated" });
+        console.log("Book details updated in books database :) ")
+    }
+    catch (err) {
+        res.status(500).json({ "error": err });
+    }
+}
+
 const saveNewOrder = async (req, res) => {
     const orders = req.body.orderData
     const allBooks = []
@@ -62,5 +79,6 @@ const saveNewOrder = async (req, res) => {
 module.exports = {
     getAllBooks,
     getBookByTitle,
+    updateBookByTitle,
     saveNewOrder
 }
