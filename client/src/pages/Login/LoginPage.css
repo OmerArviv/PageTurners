@@ -1,0 +1,13 @@
+.login-back-button {
+    margin-top: 100px;
+    background-color: #87CEFA;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-parent {
+    text-align: center;
+}

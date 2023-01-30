@@ -3,3 +3,7 @@
 .navbar-brand {
     font-family: 'Cinzel Decorative', sans-serif;
 }
+
+.navbar-link {
+    text-decoration: none;
+}

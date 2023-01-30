@@ -131,3 +131,20 @@
     text-decoration: none;
     font-size: 14px;
 }
+
+.postlist-container {
+    width: 75vw;
+    margin-left: 20px;
+    float: left;
+    margin: 20px;
+}
+
+.postlist-filters {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.postlist-filters>* {
+    margin-right: 20px;
+}
