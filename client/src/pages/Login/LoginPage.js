@@ -1,7 +1,6 @@
 import { useState, useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import './LoginPage.css';
-import classes from './LoginPage.module.css';
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -99,33 +98,33 @@ const LoginPage = () => {
     }
 
     return (
-        <section className={classes.auth}>
+        <section className="auth">
             <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
             <form onSubmit={submitHandler}>
-                <div className={classes.control}>
-                    <div className={classes.labelDiv}>
+                <div className="control">
+                    <div className="labelDiv">
                         <label htmlFor='email'>Email</label>
                     </div>
-                    <div className={classes.inputDiv}>
+                    <div className="inputDiv">
                         <input type='email' id='email' required ref={emailInputRef} />
                     </div>
                 </div>
-                <div className={classes.control}>
-                    <div className={classes.labelDiv}>
+                <div className="control">
+                    <div className="labelDiv">
                         <label htmlFor='password'>Password</label>
                     </div>
-                    <div className={classes.inputDiv}>
+                    <div className="inputDiv">
                         <input type='password' id='password' minLength="7" required ref={passwordInputRef} />
                     </div>
                 </div>
-                <div className={classes.actions}>
+                <div className="actions">
                     {!isLoading && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
                     {
                         isLoading && <p> Loading ... </p>
                     }
                     <button
                         type='button'
-                        className={classes.toggle}
+                        className="toggle"
                         onClick={switchAuthModeHandler}
                     >
                         {isLogin ? 'Create new account' : 'Login with existing account'}
