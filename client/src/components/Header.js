@@ -18,7 +18,7 @@ const Header = () => {
         <Navbar bg="light">
             <Container>
                 <Link to={"/"} className="navbar-link">
-                    <Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/">
                         <img
                             alt=""
                             src="/LogoWithoutNameWithoutBack.png"
@@ -32,8 +32,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/" >Home</Nav.Link>
-                        <Nav.Link href="#catalog">Catalog</Nav.Link>
+                        <Nav.Link href="/">Catalog</Nav.Link>
                         <Nav.Link href="#about">About</Nav.Link>
                         {
                             isAdmin &&
