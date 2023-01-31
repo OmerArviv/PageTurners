@@ -2,16 +2,15 @@ import { useState, useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import './LoginPage.css';
 import classes from './LoginPage.module.css';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-    // const history = useNavigate();
+    const navigate = useNavigate();
     const authCtx = useContext(AuthContext);
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-    const isLogged = authCtx.isLoggedIn;
 
     const API_BASE_URL = "https://identitytoolkit.googleapis.com/v1/accounts:";
     const API_SIGN_IP_ROUTE = "signInWithPassword";
@@ -90,7 +89,7 @@ const LoginPage = () => {
                         }
                     }).then((data) => {
                         authCtx.login(token, enteredEmail, data.role);
-
+                        navigate('/')
                     })
                 }
                 // history.replace('/');
@@ -100,47 +99,40 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="login-parent">
-            {
-                !isLogged
-                    ? <section className={classes.auth}>
-                        <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
-                        <form onSubmit={submitHandler}>
-                            <div className={classes.control}>
-                                <div className={classes.labelDiv}>
-                                    <label htmlFor='email'>Email</label>
-                                </div>
-                                <div className={classes.inputDiv}>
-                                    <input type='email' id='email' required ref={emailInputRef} />
-                                </div>
-                            </div>
-                            <div className={classes.control}>
-                                <div className={classes.labelDiv}>
-                                    <label htmlFor='password'>Password</label>
-                                </div>
-                                <div className={classes.inputDiv}>
-                                    <input type='password' id='password' minLength="7" required ref={passwordInputRef} />
-                                </div>
-                            </div>
-                            <div className={classes.actions}>
-                                {!isLoading && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
-                                {
-                                    isLoading && <p> Loading ... </p>
-                                }
-                                <button
-                                    type='button'
-                                    className={classes.toggle}
-                                    onClick={switchAuthModeHandler}
-                                >
-                                    {isLogin ? 'Create new account' : 'Login with existing account'}
-                                </button>
-                            </div>
-                        </form>
-                    </section>
-                    : <div />
-            }
-            <Link to={"/"} className="login-back-button">Back to homepage</Link>
-        </div>
+        <section className={classes.auth}>
+            <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+            <form onSubmit={submitHandler}>
+                <div className={classes.control}>
+                    <div className={classes.labelDiv}>
+                        <label htmlFor='email'>Email</label>
+                    </div>
+                    <div className={classes.inputDiv}>
+                        <input type='email' id='email' required ref={emailInputRef} />
+                    </div>
+                </div>
+                <div className={classes.control}>
+                    <div className={classes.labelDiv}>
+                        <label htmlFor='password'>Password</label>
+                    </div>
+                    <div className={classes.inputDiv}>
+                        <input type='password' id='password' minLength="7" required ref={passwordInputRef} />
+                    </div>
+                </div>
+                <div className={classes.actions}>
+                    {!isLoading && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
+                    {
+                        isLoading && <p> Loading ... </p>
+                    }
+                    <button
+                        type='button'
+                        className={classes.toggle}
+                        onClick={switchAuthModeHandler}
+                    >
+                        {isLogin ? 'Create new account' : 'Login with existing account'}
+                    </button>
+                </div>
+            </form>
+        </section>
     );
 };
 
