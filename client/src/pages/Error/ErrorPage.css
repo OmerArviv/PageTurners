@@ -1,0 +1,25 @@
+.error-image {
+    width: 35%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.error-back-button {
+    margin-top: 100px;
+    background-color: #87CEFA;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.error-title {
+    margin-top: 150px;
+    margin-bottom: 100px;
+    text-align: center;
+}
