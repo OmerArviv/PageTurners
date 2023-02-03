@@ -9,6 +9,7 @@ import LoginPage from './pages/Login/LoginPage'
 import AdminPage from "./pages/Admin/AdminPage";
 import ErrorPage from './pages/Error/ErrorPage';
 import About from './components/About';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -19,15 +20,18 @@ function App() {
 
   return (
     <Router>
-      <Header></Header>
-      <Routes>
-        <Route path="/" element={<Home cartItems={cartItems} setCartItems={setCartItems} />} />
-        <Route path="/book/:title" element={<BookDetails />} />
-        {isAdmin && <Route path="/admin" element={<AdminPage />} />}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <div className='flex-wrapper'>
+        <Header></Header>
+        <Routes>
+          <Route path="/" element={<Home cartItems={cartItems} setCartItems={setCartItems} />} />
+          <Route path="/book/:title" element={<BookDetails />} />
+          {isAdmin && <Route path="/admin" element={<AdminPage />} />}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        <Footer></Footer>
+      </div>
     </Router>
   );
 }
