@@ -16,6 +16,7 @@ const PostList = (props) => {
     const [publisher, setPublisher] = useState('');
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [product, setProduct] = useState(null);
+    const [sortDirection, setSortDirection] = useState();
 
     const openModal = (product) => {
         setProduct(product)
@@ -28,7 +29,6 @@ const PostList = (props) => {
         axios.get("http://localhost:5000/books/")
             .then(res => {
                 setPosts(res.data);
-                setFilteredPosts(res.data);
             })
             .catch(error => {
                 console.log(error)
@@ -52,9 +52,36 @@ const PostList = (props) => {
         handleFilter();
     }, [maxPrice, author, publisher, posts])
 
+    const sortByTitle = () => {
+        if (sortDirection === "ASC") {
+            console.log("ASC")
+            setFilteredPosts([...filteredPosts].sort((a, b) => (a.title > b.title ? 1 : -1)));
+            setSortDirection("DESC");
+        }
+        else {
+            console.log("DESC")
+            setFilteredPosts([...filteredPosts].sort((a, b) => (a.title < b.title ? 1 : -1)));
+            setSortDirection("ASC");
+        }
+    }
+
+    const sortByPrice = () => {
+        if (sortDirection === "ASC") {
+            console.log("ASC")
+            setFilteredPosts([...filteredPosts].sort((a, b) => (a.price > b.price ? 1 : -1)));
+            setSortDirection("DESC");
+        }
+        else {
+            console.log("DESC")
+            setFilteredPosts([...filteredPosts].sort((a, b) => (a.price < b.price ? 1 : -1)));
+            setSortDirection("ASC");
+        }
+    }
+
     return (
-        <div className='container'>
+        <div className='postlist-container'>
             <div className='postlist-filters'>
+
                 <span className='filter-label'>Max Price</span>
                 <input
                     className='postlist-filter'
@@ -84,12 +111,17 @@ const PostList = (props) => {
                     onChange={e => { setPublisher(e.target.value) }}
                 ></input>
             </div>
+            <div className='postlist-filters'>
+                <button onClick={() => sortByTitle()}>Sort by Title</button>
+                <button onClick={() => sortByPrice()}>Sort by Price</button>
+
+            </div>
             <Row md={1} lg={2} xl={3} xxl={4} className="g-1">
                 {
                     filteredPosts.length ?
                         filteredPosts.map(post =>
-                            <Col>
-                                <div key={post.title} className="ListItem">
+                            <Col key={post.title}>
+                                <div className="ListItem">
                                     <Card className="card">
                                         <Card.Img href={"#" + post.title} onClick={() => openModal(post)} src={post.image} className="card_image" />
                                         <Card.Body className='card-body'>

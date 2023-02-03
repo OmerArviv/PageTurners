@@ -6,7 +6,6 @@ import LoginButton from "./LoginButton/LoginButton";
 import './Header.css';
 import AuthContext from "../store/auth-context";
 import LogoutButton from "./LogoutButton/LogoutButton";
-import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -34,12 +33,10 @@ const Header = () => {
                     <Nav className="me-auto">
                         <Nav.Link href="/">Catalog</Nav.Link>
                         <Nav.Link href="#about">About</Nav.Link>
-                        {
-                            isAdmin &&
-                            <LinkContainer to="/admin">
-                                <Nav.Link>Admin</Nav.Link>
-                            </LinkContainer>
+                        {isAdmin &&
+                            <Nav.Link as={Link} to='/admin'>Admin</Nav.Link>
                         }
+
                     </Nav >
                     <Nav>
                         {

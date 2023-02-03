@@ -9,6 +9,8 @@ const LoginPage = () => {
     const [option, setOption] = useState(1);
     const navigate = useNavigate();
 
+
+
     const API_BASE_URL = "https://identitytoolkit.googleapis.com/v1/accounts:";
     const API_SIGN_IP_ROUTE = "signInWithPassword";
     const API_SIGN_UP_ROUTE = "signUp";
