@@ -1,7 +1,8 @@
-import { useState, useContext, useNavigate } from 'react';
+import { useState, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import './LoginPage.css';
-import Form from './Form'
+import Form from './Form';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const authCtx = useContext(AuthContext);
