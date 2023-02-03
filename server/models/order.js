@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const Book = require('./book').schema;
-const User = require('./user').schema;
 
 var schema = mongoose.Schema({
     books: [{             // List of all Books
         prod: {              // The Book
-            type: Book,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book",
             required: true
         },
         qty: {              // Quantity
@@ -18,7 +17,8 @@ var schema = mongoose.Schema({
         required: true
     },
     user: {
-        type: User,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     }
 }, {

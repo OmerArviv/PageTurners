@@ -15,7 +15,7 @@ const getAllUsers = async (req, res) => {
 const getUserByEmail = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.params.email });
-        res.status(200).json(user);
+        res.status(200).json(user._id);
     }
     catch (err) {
         res.status(500).json({ "error": err });
