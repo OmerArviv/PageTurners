@@ -1,33 +1,27 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import './LoginPage.css';
-import { useNavigate } from "react-router-dom";
+import Form from './Form';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const emailInputRef = useRef();
-    const passwordInputRef = useRef();
-    const navigate = useNavigate();
     const authCtx = useContext(AuthContext);
-    const [isLogin, setIsLogin] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    const [option, setOption] = useState(1);
+    const navigate = useNavigate();
 
     const API_BASE_URL = "https://identitytoolkit.googleapis.com/v1/accounts:";
     const API_SIGN_IP_ROUTE = "signInWithPassword";
     const API_SIGN_UP_ROUTE = "signUp";
     const apiKey = process.env.REACT_APP_API_KEY;
 
-    const switchAuthModeHandler = () => {
-        setIsLogin((prevState) => !prevState);
-    };
-    const submitHandler = (event) => {
+    const submitHandler = (event, emailInputRef, passwordInputRef) => {
         event.preventDefault();
 
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
-        setIsLoading(true);
         let url;
 
-        if (isLogin) {
+        if (option === 1) {
             url = `${API_BASE_URL}${API_SIGN_IP_ROUTE}?key=${apiKey}`;
         } else {
             url = `${API_BASE_URL}${API_SIGN_UP_ROUTE}?key=${apiKey}`;
@@ -44,7 +38,6 @@ const LoginPage = () => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                setIsLoading(false);
                 if (res.ok) {
                     return res.json();
                 } else {
@@ -57,7 +50,7 @@ const LoginPage = () => {
             }).then((data) => {
                 const token = data.idToken;
 
-                if (!isLogin) {
+                if (option === 2) {
                     authCtx.login(token, enteredEmail);
                     const requestOptions = {
                         method: 'POST',
@@ -98,40 +91,21 @@ const LoginPage = () => {
     }
 
     return (
-        <section className="auth">
-            <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
-            <form onSubmit={submitHandler}>
-                <div className="control">
-                    <div className="labelDiv">
-                        <label htmlFor='email'>Email</label>
+        <div id="app">
+            <div className='container' id="auth-container">
+                <header>
+                    <div className={'header-headings ' + (option === 1 ? 'sign-in' : 'sign-up')}>
+                        <span>Sign in to your account</span>
+                        <span>Create an account</span>
                     </div>
-                    <div className="inputDiv">
-                        <input type='email' id='email' required ref={emailInputRef} />
-                    </div>
-                </div>
-                <div className="control">
-                    <div className="labelDiv">
-                        <label htmlFor='password'>Password</label>
-                    </div>
-                    <div className="inputDiv">
-                        <input type='password' id='password' minLength="7" required ref={passwordInputRef} />
-                    </div>
-                </div>
-                <div className="actions">
-                    {!isLoading && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
-                    {
-                        isLoading && <p> Loading ... </p>
-                    }
-                    <button
-                        type='button'
-                        className="toggle"
-                        onClick={switchAuthModeHandler}
-                    >
-                        {isLogin ? 'Create new account' : 'Login with existing account'}
-                    </button>
-                </div>
-            </form>
-        </section>
+                </header>
+                <ul className='options'>
+                    <li className={option === 1 ? 'active' : ''} onClick={() => setOption(1)}>Sign in</li>
+                    <li className={option === 2 ? 'active' : ''} onClick={() => setOption(2)}>Sign up</li>
+                </ul>
+                <Form option={option} onClickResult={submitHandler} />
+            </div>
+        </div>
     );
 };
 

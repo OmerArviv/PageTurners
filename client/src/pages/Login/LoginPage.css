@@ -1,82 +1,89 @@
-.auth {
-    margin: 3rem auto;
-    width: 95%;
-    max-width: 25rem;
-    border-radius: 6px;
-    background-color: darkgrey;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    padding: 1rem;
-    text-align: center;
-    color: white;
+@import url("https://fonts.googleapis.com/css?family=Nunito:600,700&display=swap");
+
+* {
+    box-sizing: border-box;
 }
 
-.auth h2 {
-    margin-bottom: 25px;
-}
-
-.control {
+#app {
+    height: 100%;
     display: flex;
-    align-items: baseline;
-    margin-bottom: 0.5rem;
+    justify-content: center;
+    padding-top: 100px;
+    font-family: Nunito, Roboto, Arial, sans-serif;
+    background: linear-gradient(90deg, rgba(10, 1, 154, 1) 0%, rgba(33, 33, 159, 1) 13%, rgba(0, 212, 255, 1) 86%);
+    height: 100vh;
 }
 
-.control label {
-    display: block;
-    color: white;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+#auth-container {
+    width: 30% !important;
 }
 
-.labelDiv {
-    flex: 1;
+.container {
+    text-align: center;
+    color: #fff;
 }
 
-.inputDiv {
-    flex: 3;
+.container>header {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 auto 60px auto;
+    position: relative;
+    height: 35px;
+    width: 250px;
+    overflow: hidden;
 }
 
-.control input {
-    font: inherit;
-    background-color: lightgrey;
-    color: #38015c;
-    border-radius: 4px;
-    border: 1px solid white;
-    width: 100%;
-    text-align: left;
-    padding: 0.25rem;
-}
-
-.actions {
-    margin-top: 1.5rem;
+.header-headings {
     display: flex;
     flex-direction: column;
+    position: absolute;
+    width: 100%;
+    transition: all 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.96);
+}
+
+.header-headings>span {
+    margin: 3px 0;
+}
+
+.header-headings.sign-in {
+    transform: translateY(0);
+}
+
+.header-headings.sign-up {
+    transform: translateY(-35px);
+}
+
+.options {
+    display: inline-flex;
     align-items: center;
+    width: 350px;
+    justify-content: space-between;
 }
 
-.actions button {
+@media screen and (max-width: 380px) {
+    .options {
+        width: 100%;
+    }
+}
+
+.options>li {
     cursor: pointer;
-    font: inherit;
-    color: white;
-    background-color: burlywood;
-    border: 1px solid burlywood;
-    border-radius: 4px;
-    padding: 0.5rem 2.5rem;
+    opacity: .5;
+    transition: all .2s ease;
 }
 
-.actions button:hover {
-    background-color: goldenrod;
-    border-color: goldenrod;
+.options>li:hover {
+    opacity: 1;
 }
 
-.actions .toggle {
-    margin-top: 1rem;
-    background-color: transparent;
-    color: burlywood;
-    border: none;
-    padding: 0.15rem 1.5rem;
+.options>li.active {
+    opacity: 1;
 }
 
-.actions .toggle:hover {
-    background-color: transparent;
-    color: goldenrod;
+.options>li:nth-of-type(2) {
+    margin-left: 15px;
+}
+
+.options>li:last-of-type {
+    margin-left: auto;
 }
