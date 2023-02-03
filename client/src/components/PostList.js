@@ -17,6 +17,46 @@ const PostList = (props) => {
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [product, setProduct] = useState(null);
     const [sortDirection, setSortDirection] = useState();
+    let addBtn, cart;
+    const speed = 200;
+
+    function init() {
+        addBtn = document.querySelectorAll("[data-addToCart]");
+        cart = document.querySelector(".CartItems");
+        console.log(`init ${addBtn}`);
+
+        for (let btn of addBtn) {
+            console.log(`add event`);
+
+            btn.addEventListener("click", addItem);
+        }
+    }
+
+    function addItem(e) {
+        let imageToFly = e.currentTarget.parentNode.parentNode.querySelector('.card-img');
+        let disLeft = imageToFly.getBoundingClientRect().left;
+        let disTop = imageToFly.getBoundingClientRect().top;
+        let cartleft = cart.getBoundingClientRect().left;
+        let carttop = cart.getBoundingClientRect().top;
+        let flyingBtn = imageToFly.cloneNode(true);
+
+        flyingBtn.style = 'z-index: 1111; width: 160px;opacity:0.8; position:fixed; top:' + disTop + 'px;left:' + disLeft + 'px;transition: left 2s, top 2s, width 2s, opacity 2s cubic-bezier(1, 1, 1, 1)';
+
+
+        flyingBtn.classList.add("flyingBtn");
+
+        let rechange = document.body.appendChild(flyingBtn);
+
+        setTimeout(() => {
+            flyingBtn.style.left = cartleft + 'px';
+            flyingBtn.style.top = carttop + 'px';
+            flyingBtn.style.width = '200px';
+            flyingBtn.style.opacity = '0';
+        }, speed);
+        setTimeout(() => {
+            rechange.parentNode.removeChild(rechange);
+        }, speed * 10)
+    }
 
     const openModal = (product) => {
         setProduct(product)
@@ -78,6 +118,7 @@ const PostList = (props) => {
         }
     }
 
+    init();
     return (
         <div className='postlist-container'>
             <div className='postlist-filters'>
@@ -129,7 +170,7 @@ const PostList = (props) => {
                                             <Card.Text className="card-text">
                                                 {post.price} ₪
                                             </Card.Text>
-                                            <Button className='btn_addtocart' onClick={() => props.onAddItem(post)}>Add to Cart</Button>
+                                            <Button className='btn_addtocart' data-addtocart onClick={() => props.onAddItem(post)}>Add to Cart</Button>
                                         </Card.Body>
                                     </Card>
                                 </div>
