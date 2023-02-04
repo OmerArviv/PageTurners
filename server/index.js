@@ -33,11 +33,13 @@ app.use(express.urlencoded({ extended: true }))
 // Routers
 const booksRoute = require('./routes/books');
 const usersRoute = require('./routes/users');
+const ordersRoute = require('./routes/orders');
 
 const Book = require('./models/book');
 
 app.use('/books', booksRoute)
 app.use('/users', usersRoute)
+app.use('/orders', ordersRoute)
 
 const checkBookImage = (book) => {
     return axios.get(book.image, { timeout: 60000 })
