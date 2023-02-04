@@ -8,6 +8,7 @@ import AuthContext from './store/auth-context'
 import LoginPage from './pages/Login/LoginPage'
 import AdminPage from "./pages/Admin/AdminPage";
 import ErrorPage from './pages/Error/ErrorPage';
+import About from './components/About';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/book/:title" element={<BookDetails />} />
         {isAdmin && <Route path="/admin" element={<AdminPage />} />}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
