@@ -23,10 +23,10 @@ const getBookByTitle = async (req, res) => {
 }
 
 const updateBookByTitle = async (req, res) => {
-    const {newTitle, author, price} = req.body;
+    const { newTitle, author, price } = req.body;
 
     try {
-        await Book.updateOne({title: req.params.title}, {
+        await Book.updateOne({ title: req.params.title }, {
             title: newTitle,
             author: author,
             price: price
@@ -45,16 +45,8 @@ const saveNewOrder = async (req, res) => {
     let totalCost = 0;
     orders.forEach(element => {
         const el = JSON.parse(element)
-        const newBook = new Book({
-            title: el.title,
-            price: el.price,
-            image: el.image,
-            author: el.author,
-            publisher: el.publisher
-        })
-        allBooks.push({ prod: newBook, qty: el.qty })
+        allBooks.push({ prod: el._id, qty: el.qty })
         totalCost = totalCost + (el.price * el.qty)
-        console.log(newBook)
     });
 
     const newOrder = new Order({

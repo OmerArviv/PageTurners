@@ -9,10 +9,8 @@ const LoginPage = () => {
     const [option, setOption] = useState(1);
     const navigate = useNavigate();
 
-
-
     const API_BASE_URL = "https://identitytoolkit.googleapis.com/v1/accounts:";
-    const API_SIGN_IP_ROUTE = "signInWithPassword";
+    const API_SIGN_IN_ROUTE = "signInWithPassword";
     const API_SIGN_UP_ROUTE = "signUp";
     const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -24,7 +22,7 @@ const LoginPage = () => {
         let url;
 
         if (option === 1) {
-            url = `${API_BASE_URL}${API_SIGN_IP_ROUTE}?key=${apiKey}`;
+            url = `${API_BASE_URL}${API_SIGN_IN_ROUTE}?key=${apiKey}`;
         } else {
             url = `${API_BASE_URL}${API_SIGN_UP_ROUTE}?key=${apiKey}`;
         }
@@ -86,7 +84,6 @@ const LoginPage = () => {
                         navigate('/')
                     })
                 }
-                // history.replace('/');
             }).catch(err => {
                 alert(err.message);
             });

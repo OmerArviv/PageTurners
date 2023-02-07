@@ -36,7 +36,6 @@ function Home() {
 
     const sendOrder = async () => {
         const orderData = await CartItems.map(item => JSON.stringify(item))
-        //console.log(orderData)
 
         setCartItems(
             CartItems.filter(x => false)
@@ -71,14 +70,9 @@ function Home() {
             }
 
             fetch('http://localhost:5000/books/', requestOptions);
-            // history.replace('/');
         }).catch(err => {
             alert(err.message);
         });
-
-        const response = await fetch('http://localhost:5000/books/', requestOptions);
-        const data = await response.json();
-        console.log(data)
     }
 
     useEffect(() => {
