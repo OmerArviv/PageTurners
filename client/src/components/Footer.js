@@ -1,11 +1,12 @@
 import React from "react";
 import './Footer.css'
+import { Link } from "react-router-dom";
 
 const Footer = () => (
     <div className="footer-wrapper bg-light">
         <ul className="list-inline">
-            <li className="list-inline-item"><a href="/">Home</a></li>
-            <li className="list-inline-item"><a href="/about">About</a></li>
+            <Link className="list-inline-item" to={"/"}>Home</Link>
+            <Link className="list-inline-item" to={"/about"}>About</Link>
         </ul>
         <p className="copyright">PageTurners © 2023</p>
     </div>
