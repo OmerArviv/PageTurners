@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from 'react'
 import PostList from './PostList';
 import Basket from './Basket';
 import AuthContext from '../store/auth-context';
+import './Home.css';
 
 function Home() {
 

@@ -2,10 +2,10 @@ import React from 'react';
 import './Basket.css'
 import Button from 'react-bootstrap/esm/Button';
 import Modal from 'react-bootstrap/Modal';
-import Bounce from 'react-reveal/Bounce';
 import AuthContext from '../store/auth-context';
 import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import BillingForm from './BillingForm';
 
 function Basket(props) {
     const { CartItems, onAddItem, onRemoveItem, sendOrder } = props;
@@ -13,6 +13,15 @@ function Basket(props) {
     const authCtx = useContext(AuthContext);
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+
+    const handleSendOrder = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -23,7 +32,7 @@ function Basket(props) {
 
     const checkLoginAndSendOrder = () => {
         if (authCtx.isLoggedIn) {
-            sendOrder()
+            handleSendOrder();
         } else {
             handleShow()
         }
@@ -58,22 +67,25 @@ function Basket(props) {
                 )}
             </div>
             {
-                <Bounce top>
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Please login before purchase</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>Great buy! Let's log you in before sending your order</Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Cancel
-                            </Button>
-                            <Button variant="primary" onClick={navigateLogin}>
-                                Login
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
-                </Bounce>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Please login before purchase</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Great buy! Let's log you in before sending your order</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={navigateLogin}>
+                            Login
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            }
+            {
+                <Modal show={showModal} >
+                    <BillingForm handleCloseModal={handleCloseModal} sendOrder={sendOrder} />
+                </Modal>
             }
         </div>
     );
