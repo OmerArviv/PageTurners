@@ -55,6 +55,14 @@ h3 {
     position: relative !important;
 }
 
+h4 .about-min-title {
+    background-color: transparent;
+    color: black;
+    padding: 0;
+    cursor: text;
+    pointer-events: none;
+}
+
 .title-border-simple:after,
 .title-border-simple:before {
     border-radius: 50px;
