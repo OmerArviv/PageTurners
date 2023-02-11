@@ -1,0 +1,24 @@
+.usedBooks-container {
+    padding: 30px;
+    text-align: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.usedBooks-header {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.usedBooks-text {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.usedBooks {
+    background-image: url('//png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-beautiful-bokeh-background-with-soft-color-image_351546.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}

@@ -44,6 +44,9 @@ const BillingForm = (props) => {
     return (
         <form className="billing-form" onSubmit={handleSubmit}>
             <img src="//www.theorchardcottage.co.nz/wp-content/uploads/2018/09/visa-and-mastercard-logos-logo-visa-png-logo-visa-mastercard-png-visa-logo-white-png-awesome-logos.png" alt="Mastercard logo" className="billing-logo" />
+            <span className='billing-exit' onClick={handleCloseModal}>
+                X
+            </span>
             <div className="form-field">
                 <label htmlFor="cardNumber">Card Number:</label>
                 <input

@@ -25,6 +25,7 @@ export const AuthContextProvider = (props) => {
         setEmail(email);
         setIsAdmin(role === ADMIN_ROLE);
     }
+
     const logoutHandler = () => {
         setToken(null);
         setEmail(null);
@@ -39,7 +40,6 @@ export const AuthContextProvider = (props) => {
         login: loginHandler,
         logout: logoutHandler
     };
-
 
     return <AuthContext.Provider value={contextValue}>
         {props.children}

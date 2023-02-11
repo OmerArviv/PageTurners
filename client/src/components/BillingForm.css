@@ -35,3 +35,10 @@ button {
     border: none;
     cursor: pointer;
 }
+
+.billing-exit {
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
