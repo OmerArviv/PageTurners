@@ -4,3 +4,21 @@
     gap: 45px;
     margin-top: 30px;
 }
+
+.tabs {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.tab {
+    cursor: pointer;
+}
+
+.selectedTab {
+    background-color: lightblue;
+}
+
+.tab:hover {
+    background-color: lightblue;
+}
