@@ -8,8 +8,7 @@ export default function UsedBooks() {
             <div className="usedBooks-container">
                 <h1 className="usedBooks-header">Do you have any used books that you don't need ?</h1>
                 <p className="usedBooks-text">
-                    PageTurners is a book store that has been providing quality reading materials to book lovers for many years. Our store is dedicated to fostering a love of reading in all of our customers. Whether you are a seasoned reader or just starting to explore the world of books, we have something for everyone.
-                </p>
+                    Donating used books benefits the community by supporting literacy and reducing waste. Your generosity can make a positive impact by providing access to books for those in need and spreading the joy of reading. Consider donating to a local library, school, or charity.                </p>
                 <Counter />
             </div>
         </div>
