@@ -10,6 +10,7 @@ import AdminPage from "./pages/Admin/AdminPage";
 import ErrorPage from './pages/Error/ErrorPage';
 import About from './components/About';
 import Footer from './components/Footer';
+import UsedBooks from './pages/UsedBooks/UsedBooks';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           {isAdmin && <Route path="/admin" element={<AdminPage />} />}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/usedBooks" element={<UsedBooks />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer></Footer>

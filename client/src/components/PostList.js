@@ -23,10 +23,8 @@ const PostList = (props) => {
     function init() {
         addBtn = document.querySelectorAll("[data-addToCart]");
         cart = document.querySelector(".CartItems");
-        console.log(`init ${addBtn}`);
 
         for (let btn of addBtn) {
-            console.log(`add event`);
 
             btn.addEventListener("click", addItem);
         }
@@ -94,12 +92,10 @@ const PostList = (props) => {
 
     const sortByTitle = () => {
         if (sortDirection === "ASC") {
-            console.log("ASC")
             setFilteredPosts([...filteredPosts].sort((a, b) => (a.title > b.title ? 1 : -1)));
             setSortDirection("DESC");
         }
         else {
-            console.log("DESC")
             setFilteredPosts([...filteredPosts].sort((a, b) => (a.title < b.title ? 1 : -1)));
             setSortDirection("ASC");
         }
@@ -107,12 +103,10 @@ const PostList = (props) => {
 
     const sortByPrice = () => {
         if (sortDirection === "ASC") {
-            console.log("ASC")
             setFilteredPosts([...filteredPosts].sort((a, b) => (a.price > b.price ? 1 : -1)));
             setSortDirection("DESC");
         }
         else {
-            console.log("DESC")
             setFilteredPosts([...filteredPosts].sort((a, b) => (a.price < b.price ? 1 : -1)));
             setSortDirection("ASC");
         }

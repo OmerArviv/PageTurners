@@ -1,0 +1,29 @@
+.custom-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+}
+
+.custom-count {
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.custom-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
