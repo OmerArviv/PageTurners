@@ -2,16 +2,14 @@
     position: absolute;
     right: 0;
     width: 20vw;
-    margin: 50px;
+    margin: 30px;
     padding: 20px;
     border: 2px solid;
     height: auto;
     background-color: #f2f2f2;
-    padding: 20px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px #999;
-    margin-top: 150px;
-
+    margin-top: 190px;
 }
 
 .CartItems h2 {

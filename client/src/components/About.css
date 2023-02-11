@@ -1,19 +1,25 @@
 .about-container {
     padding: 30px;
-    text-align: center;
-    width: 40%;
+    width: 70%;
     margin: 0 auto;
 }
 
 .about-header {
     font-size: 36px;
-    margin-bottom: 30px;
+    padding-top: 20px;
+    text-transform: uppercase !important;
 }
 
 .about-text {
     font-size: 18px;
     line-height: 1.5;
     margin-bottom: 20px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.line-h-26 {
+    line-height: 26px;
 }
 
 .about {
@@ -21,4 +27,89 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
+    font-family: Rubik, sans-serif;
+}
+
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+
+.fw-light {
+    font-weight: 300 !important;
+}
+
+@media (min-width: 1200px) {
+
+    .h3,
+    h3 {
+        font-size: 1.75rem;
+    }
+}
+
+.h3,
+h3 {
+    font-size: calc(1.3rem + .6vw);
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+h4 .about-min-title {
+    background-color: transparent;
+    color: black;
+    padding: 0;
+    cursor: text;
+    pointer-events: none;
+}
+
+.title-border-simple:after,
+.title-border-simple:before {
+    border-radius: 50px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+.title-border-simple:before {
+    background-color: #005bea;
+    height: 2px;
+    top: 15px;
+    width: 120px;
+}
+
+.title-border-simple:after {
+    background-color: #ff8700;
+    height: 6px;
+    top: 13px;
+    width: 30px;
+}
+
+.about-box {
+    transition: all .5s;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.about-box .about-icon {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 50px;
+    height: 52px;
+    line-height: 64px;
+    margin: 0 auto;
+    width: 52px;
+}
+
+.about-box:hover .about-icon {
+    background-color: white;
+    transition: all .5s;
+    box-shadow: 0 0 0 6px black;
+    opacity: 0.5;
+}
+
+.f-15 {
+    font-size: 15px;
 }

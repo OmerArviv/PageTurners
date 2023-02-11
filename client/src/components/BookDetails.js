@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ function BookDetails() {
             .catch(error => {
                 console.log(error);
             });
-    }, []);
+    }, [title]);
 
 
     return (
