@@ -17,6 +17,40 @@ const BooksChart = () => {
             })
     }, []);
 
+    function wrap(text, width) {
+        text.each(function () {
+            let text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                y = text.attr("y"),
+                dy = parseFloat(text.attr("dy")),
+                tspan = text.text(null)
+                    .append("tspan")
+                    .attr("x", 0)
+                    .attr("y", y)
+                    .attr('text-anchor', 'middle')
+                    .attr("dy", dy + "em");
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan")
+                        .attr("x", 0)
+                        .attr("y", y)
+                        .attr('text-anchor', 'middle')
+                        .attr("dy", `${++lineNumber * lineHeight + dy}em`)
+                        .text(word);
+                }
+            }
+        });
+    }
+
     const svg = d3.select('svg');
     const margin = 80;
     const width = 1000 - 2 * margin;
@@ -39,7 +73,11 @@ const BooksChart = () => {
 
     chart.append('g')
         .attr('transform', `translate(0, ${height})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale).tickSizeOuter(0))
+        .selectAll("text")
+        .attr('text-anchor', 'middle')
+        .style("text-anchor", "end")
+        .call(wrap, xScale.bandwidth());
 
     chart.append('g')
         .call(d3.axisLeft(yScale));
@@ -75,7 +113,7 @@ const BooksChart = () => {
     svg.append('text')
         .attr('class', 'label')
         .attr('x', -(height / 2) - margin)
-        .attr('y', margin / 2.4)
+        .attr('y', margin / 4)
         .attr('transform', 'rotate(-90)')
         .attr('text-anchor', 'middle')
         .text('Profit');
@@ -83,9 +121,9 @@ const BooksChart = () => {
     svg.append('text')
         .attr('class', 'label')
         .attr('x', width / 2 + margin)
-        .attr('y', height + margin * 1.7)
+        .attr('y', height + margin * 2.1)
         .attr('text-anchor', 'middle')
-        .text('Books');
+        .text('Books')
 
     svg.append('text')
         .attr('class', 'title')
