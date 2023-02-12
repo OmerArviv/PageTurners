@@ -45,13 +45,10 @@ const saveNewOrder = async (req, res) => {
         user: req.body.user
     })
 
-    console.log(newOrder)
-
     try {
         await newOrder.save();
 
         res.status(200).json({ "status": "New order was added" });
-        console.log("Order saved in orders database :) ")
     } catch (err) {
         console.log(err)
         res.status(500).json({ "status": "Failed to add new order" });
