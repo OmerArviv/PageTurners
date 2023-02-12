@@ -1,5 +1,5 @@
 const Book = require('../models/book');
-const Order = require('../models/order');
+const Response = require('../config/response');
 
 // Get all books
 const getAllBooks = async (req, res) => {
@@ -8,7 +8,7 @@ const getAllBooks = async (req, res) => {
         res.status(200).json(books);
     }
     catch (err) {
-        res.status(500).json({ "error": err });
+        res.status(500).json({ "status": Response.book.queryError });
     }
 }
 
@@ -18,7 +18,25 @@ const getBookByTitle = async (req, res) => {
         res.status(200).json(book);
     }
     catch (err) {
-        res.status(500).json({ "error": err });
+        res.status(500).json({ "status": Response.book.queryError });
+    }
+}
+
+const saveNewBook = async (req, res) => {
+    const newBook = new Book({
+        author: req.body.author,
+        publisher: req.body.publisher,
+        title: req.body.title,
+        price: req.body.price,
+        image: req.body.image,
+    });
+
+    try {
+        await newBook.save();
+
+        res.status(200).json({ "status": "New book was added" });
+    } catch (err) {
+        res.status(500).json({ "status": Response.book.creationError });
     }
 }
 
@@ -31,46 +49,30 @@ const updateBookByTitle = async (req, res) => {
             author: author,
             price: price
         });
+
         res.status(200).json({ "status": "Book details updated" });
-        console.log("Book details updated in books database :) ")
     }
     catch (err) {
-        res.status(500).json({ "error": err });
+        res.status(500).json({ "status": Response.book.deleteError });
     }
 }
 
-const saveNewOrder = async (req, res) => {
-    const orders = req.body.orderData
-    const allBooks = []
-    let totalCost = 0;
-    orders.forEach(element => {
-        const el = JSON.parse(element)
-        allBooks.push({ prod: el._id, qty: el.qty })
-        totalCost = totalCost + (el.price * el.qty)
-    });
-
-    const newOrder = new Order({
-        books: allBooks,
-        totalcost: totalCost,
-        user: req.body.user
-    })
-
-    console.log(newOrder)
-
+// Will delete a book from the system
+const deleteBookByTitle = async (req, res) => {
     try {
-        await newOrder.save();
+        await Book.deleteOne({ "title": req.params.title });
 
-        res.status(200).json({ "status": "New order was added" });
-        console.log("Order saved in orders database :) ")
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({ "status": "Failed to add new order" });
+        res.status(200).json({ "status": "Book deleted!" });
+    }
+    catch (err) {
+        res.status(500).json({ "status": Response.book.deleteError })
     }
 }
 
 module.exports = {
     getAllBooks,
     getBookByTitle,
+    saveNewBook,
     updateBookByTitle,
-    saveNewOrder
+    deleteBookByTitle
 }
