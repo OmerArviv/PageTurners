@@ -1,44 +1,21 @@
 import * as d3 from 'd3';
 import "./BooksChart.css";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const BooksChart = () => {
     const [books, setBooks] = useState([]);
+    const NUMBER_OF_SHOWN_BOOKS = 5;
 
     useEffect(() => {
-        axios.get("http://localhost:5000/orders/")
+        axios.get("http://localhost:5000/orders/getMostProfitableBooks/" + NUMBER_OF_SHOWN_BOOKS)
             .then(res => {
-                setBooks(getMostProfitableBooks(res.data));
+                setBooks(res.data);
             })
             .catch(error => {
                 console.log(error);
             })
     }, []);
-
-    const getMostProfitableBooks = (orders) => {
-        const booksProfits = orders.reduce((profitableBooks, order) => {
-            order.books.forEach(bookOrder => {
-                const bookDetails = bookOrder.prod;
-                profitableBooks[bookDetails.title] = (profitableBooks[bookDetails.title] ?? 0)
-                    + bookDetails.price * bookOrder.qty
-            });
-
-            return profitableBooks;
-        }, []);
-
-        const NUMBER_OF_SHOWN_BOOKS = 5;
-
-        const topProfitableBooks = Object.entries(booksProfits)
-            .map(book => ({
-                title: book[0],
-                profit: book[1]
-            }))
-            .sort((a, b) => b.profit - a.profit)
-            .slice(0, NUMBER_OF_SHOWN_BOOKS);
-
-        return topProfitableBooks;
-    };
 
     const svg = d3.select('svg');
     const margin = 80;
@@ -50,7 +27,7 @@ const BooksChart = () => {
 
     const xScale = d3.scaleBand()
         .range([0, width])
-        .domain(books.map((s) => s.title))
+        .domain(books.map((s) => s.book[0].title))
         .padding(0.4);
 
     const yScale = d3.scaleLinear()
@@ -82,18 +59,18 @@ const BooksChart = () => {
     barGroups
         .append('rect')
         .attr('class', 'bar')
-        .attr('x', (g) => xScale(g.title))
-        .attr('y', (g) => yScale(g.profit))
-        .attr('height', (g) => height - yScale(g.profit))
+        .attr('x', (g) => xScale(g.book[0].title))
+        .attr('y', (g) => yScale(g.total))
+        .attr('height', (g) => height - yScale(g.total))
         .attr('width', xScale.bandwidth());
 
     barGroups
         .append('text')
         .attr('class', 'value')
-        .attr('x', (a) => xScale(a.title) + xScale.bandwidth() / 2)
-        .attr('y', (a) => yScale(a.profit) + 30)
+        .attr('x', (a) => xScale(a.book[0].title) + xScale.bandwidth() / 2)
+        .attr('y', (a) => yScale(a.total) + 30)
         .attr('text-anchor', 'middle')
-        .text((a) => `${a.profit}₪`);
+        .text((a) => `${a.total}₪`);
 
     svg.append('text')
         .attr('class', 'label')
@@ -118,7 +95,7 @@ const BooksChart = () => {
         .text('Most profitable books');
 
     return <div id="container">
-        <svg/>
+        <svg />
     </div>
 };
 
