@@ -69,7 +69,7 @@ function Home() {
                 })
             }
 
-            fetch('http://localhost:5000/books/', requestOptions);
+            fetch('http://localhost:5000/orders/', requestOptions);
         }).catch(err => {
             alert(err.message);
         });

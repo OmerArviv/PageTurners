@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 const http = require('http').Server(app);
 const axios = require('axios');
 const axiosRetry = require('axios-retry');
+const cors = require("cors");
 require('dotenv/config');
 
 axiosRetry(axios, {
@@ -19,7 +20,6 @@ axiosRetry(axios, {
     },
 });
 
-const cors = require("cors");
 const corsOptions = {
     origin: '*',
     credentials: true,            // access-control-allow-credentials:true
@@ -44,7 +44,7 @@ app.use('/orders', ordersRoute)
 const checkBookImage = (book) => {
     return axios.get(book.image, { timeout: 60000 })
         .then(() => {
-            book.save();
+            axios.post("http://localhost:5000/books/", book)
         })
         .catch(() => {
             // Ignore on purpose
@@ -62,14 +62,15 @@ const addBooks = (query, numToAdd) => {
                 }
 
                 if (books[i].author_name && books[i].title && books[i].publisher && books[i].publisher[0] && books[i].publisher[0].length > 0 && books[i].isbn && await Book.findOne({ "title": books[i].title }) == null) {
-                    const newBook = new Book({
+                    const payload = {
                         author: books[i].author_name[0],
                         publisher: books[i].publisher[0],
                         title: books[i].title,
                         price: Math.floor(Math.random() * (80 - 40) + 40),
-                        image: `https://covers.openlibrary.org/b/isbn/${books[i].isbn[0]}-M.jpg`,
-                    });
-                    await checkBookImage(newBook);
+                        image: `https://covers.openlibrary.org/b/isbn/${books[i].isbn[0]}-M.jpg`
+                    }
+
+                    await checkBookImage(payload);
                 }
             }
         });
