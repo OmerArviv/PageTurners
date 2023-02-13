@@ -12,6 +12,7 @@
     background-color: #e5e5e5;
     box-shadow: 2px 2px 5px #ccc;
     position: relative;
+    height: 40rem;
 }
 
 .book-cover {
@@ -24,6 +25,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    text-align: center;
+    align-items: center;
 }
 
 .book-name {
@@ -35,6 +38,7 @@
 .book-price {
     font-size: 14px;
     color: gray;
+    text-align: center;
 }
 
 .control {
@@ -50,4 +54,3 @@
     width: 100%;
     margin-top: auto;
 }
-
