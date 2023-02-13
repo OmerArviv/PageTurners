@@ -142,13 +142,23 @@
 }
 
 .postlist-filters {
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 }
 
-.postlist-filters>* {
+.filter-block {
+    display: grid;
+    padding-right: 30px;
+}
+
+.sort-button {
     margin-right: 20px;
+}
+
+.sort-button:hover {
+    opacity: 0.5;
+    cursor: pointer;
 }
 
 :root {
@@ -164,9 +174,7 @@
 }
 
 [data-addToCart] {
-    background: var(--color-2);
     border: none;
-    border-radius: 100%;
     color: white;
     outline: none;
     -webkit-box-shadow: 0px 6px 3px -3px rgba(0, 0, 0, 0.2);

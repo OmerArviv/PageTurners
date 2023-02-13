@@ -116,40 +116,44 @@ const PostList = (props) => {
     return (
         <div className='postlist-container'>
             <div className='postlist-filters'>
-
-                <span className='filter-label'>Max Price</span>
-                <input
-                    className='postlist-filter'
-                    type="text"
-                    name="maxPrice"
-                    value={maxPrice}
-                    onChange={e => {
-                        if (!isNaN(e.target.value)) {
-                            setMaxPrice(e.target.value)
-                        }
-                    }}
-                ></input>
-                <span className='filter-label'>Author</span>
-                <input
-                    className='postlist-filter'
-                    type="text"
-                    name="author"
-                    value={author}
-                    onChange={e => setAuthor(e.target.value)}
-                ></input>
-                <span className='filter-label'>Publisher</span>
-                <input
-                    className='postlist-filter'
-                    type="text"
-                    name="publisher"
-                    value={publisher}
-                    onChange={e => { setPublisher(e.target.value) }}
-                ></input>
+                <div className='filter-block'>
+                    <span className='filter-label'>Max Price</span>
+                    <input
+                        className='postlist-filter'
+                        type="number"
+                        name="maxPrice"
+                        value={maxPrice}
+                        onChange={e => {
+                            if (!isNaN(e.target.value)) {
+                                setMaxPrice(e.target.value)
+                            }
+                        }}
+                    ></input>
+                </div>
+                <div className='filter-block'>
+                    <span className='filter-label'>Author</span>
+                    <input
+                        className='postlist-filter'
+                        type="text"
+                        name="author"
+                        value={author}
+                        onChange={e => setAuthor(e.target.value)}
+                    ></input>
+                </div>
+                <div className='filter-block'>
+                    <span className='filter-label'>Publisher</span>
+                    <input
+                        className='postlist-filter'
+                        type="text"
+                        name="publisher"
+                        value={publisher}
+                        onChange={e => { setPublisher(e.target.value) }}
+                    ></input>
+                </div>
             </div>
             <div className='postlist-filters'>
-                <button onClick={() => sortByTitle()}>Sort by Title</button>
-                <button onClick={() => sortByPrice()}>Sort by Price</button>
-
+                <button className="sort-button" onClick={() => sortByTitle()}>Sort by Title</button>
+                <button className="sort-button" onClick={() => sortByPrice()}>Sort by Price</button>
             </div>
             <Row md={1} lg={2} xl={3} xxl={4} className="g-1">
                 {
