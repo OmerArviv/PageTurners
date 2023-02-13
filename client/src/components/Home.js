@@ -58,7 +58,6 @@ function Home() {
                 });
             }
         }).then((data) => {
-            console.log(data);
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -69,7 +68,7 @@ function Home() {
                 })
             }
 
-            fetch('http://localhost:5000/books/', requestOptions);
+            fetch('http://localhost:5000/orders/', requestOptions);
         }).catch(err => {
             alert(err.message);
         });

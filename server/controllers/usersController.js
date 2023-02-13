@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Config = require('../config/roles');
+const Response = require('../config/response')
 
 // Get all users
 const getAllUsers = async (req, res) => {
@@ -8,7 +9,7 @@ const getAllUsers = async (req, res) => {
         res.status(200).json(users);
     }
     catch (err) {
-        res.status(500).json({ "error": err });
+        res.status(500).json({ "status": Response.user.queryError });
     }
 }
 
@@ -18,7 +19,7 @@ const getUserByEmail = async (req, res) => {
         res.status(200).json(user);
     }
     catch (err) {
-        res.status(500).json({ "error": err });
+        res.status(500).json({ "status": Response.user.queryError });
     }
 }
 
@@ -28,20 +29,17 @@ const createNewUser = async (req, res) => {
         role: Config.ROLES.guest
     });
 
-    console.log(user)
-
     try {
         await user.save();
 
         res.status(200).json({ "status": "New user was added" });
     } catch (err) {
-        console.log(err)
-        res.status(500).json({ "status": "Failed to create new user" });
+        res.status(500).json({ "status": Response.user.creationError });
     }
 }
 
 const updateUser = async (req, res) => {
-    var newData = {
+    const newData = {
         "role": req.body["0"]
     }
 
@@ -60,7 +58,7 @@ const updateUser = async (req, res) => {
     }
 }
 
-// Will delete a user from the system - Admin only
+// Will delete a user from the system
 const deleteUser = async (req, res) => {
     try {
         await User.deleteOne({ "_id": req.params.id });

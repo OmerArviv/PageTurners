@@ -1,6 +1,5 @@
-
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 div#layout {
@@ -9,9 +8,8 @@ div#layout {
 
 div#container {
     width: 1000px;
-    height: 600px;
+    height: 630px;
     margin: auto;
-    background-color: #272966;
 }
 
 svg {
@@ -23,9 +21,12 @@ svg {
     fill: #80cbc4;
 }
 
+.bar:hover {
+    fill: steelblue;
+}
+
 text {
     font-size: 12px;
-    fill: #fff;
 }
 
 path {
