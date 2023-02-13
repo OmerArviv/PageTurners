@@ -52,6 +52,7 @@ const BillingForm = (props) => {
                 <input
                     type="text"
                     id="cardNumber"
+                    pattern='^(?:4\d{3}|5[1-5]\d{2}|6011|3[47]\d{2})([-\s]?)\d{4}\1\d{4}\1\d{3,4}$'
                     value={cardNumber}
                     onChange={event => {
                         let value = event.target.value;
@@ -67,16 +68,15 @@ const BillingForm = (props) => {
             <div className="form-field">
                 <label htmlFor="expirationDate">Expiration Date:</label>
                 <input
-                    type="text"
+                    type="date"
                     id="expirationDate"
                     value={expirationDate}
                     onChange={(event) => {
-                        let value = event.target.value;
-                        if (!isNaN(value.replace(/\s/g, ''))) {
-                            value = value.replace(/[^\dA-Z]/g, '').replace(/(.{2})/g, '$1 ').trim();
-                            if (value.length <= 5) {
-                                setExpirationDate(value);
-                            }
+                        const date = new Date();
+                        const today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                        const targetDate = new Date(event.target.value)
+                        if (targetDate >= today) {
+                            setExpirationDate(event.target.value);
                         }
                     }} />
             </div>
@@ -88,7 +88,7 @@ const BillingForm = (props) => {
                     value={securityCode}
                     onChange={(event) => {
                         let value = event.target.value.replace(/\s/g, '');
-                        if (!isNaN(value) && value.length <= 3) {
+                        if (!isNaN(value) && value.length <= 4) {
                             setSecurityCode(value)
                         }
 
