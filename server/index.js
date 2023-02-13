@@ -2,11 +2,14 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
 var bodyParser = require('body-parser')
-const http = require('http').Server(app);
+const http = require('http');
 const axios = require('axios');
 const axiosRetry = require('axios-retry');
 const cors = require("cors");
 require('dotenv/config');
+const { Server } = require("socket.io");
+
+let userCount = 0;
 
 axiosRetry(axios, {
     retries: 12, // number of retries
@@ -25,10 +28,34 @@ const corsOptions = {
     credentials: true,            // access-control-allow-credentials:true
     optionSuccessStatus: 200,
 }
+
 app.use(cors(corsOptions)) // Use this after the variable declaration
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }))
+
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+    },
+})
+
+io.on("connection", (socket) => {
+    console.log(`User Connected: ${socket.id}`)
+    userCount++;
+    console.log(`user count = ${userCount}`)
+    io.emit("userCountUpdate", userCount);
+    socket.on('disconnect', function () {
+        console.log(`User disconnected: ${socket.id}`);
+        userCount--;
+        console.log(`user count = ${userCount}`);
+        io.emit("userCountUpdate", userCount);
+
+    });
+})
+
 
 // Routers
 const booksRoute = require('./routes/books');
@@ -77,7 +104,7 @@ const addBooks = (query, numToAdd) => {
 }
 
 const startListen = () => {
-    http.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
         console.log(`Listening on PORT: ${process.env.PORT}`)
     });
 }
