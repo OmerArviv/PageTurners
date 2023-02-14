@@ -10,36 +10,18 @@ const BillingForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (cardNumber.length === 19) {
-            if (isValidDate()) {
-                if (securityCode.length === 3) {
-                    handleCloseModal();
-                    sendOrder();
-                }
-                else {
-                    alert('Please enter a valid security code');
-                }
+            if (securityCode.length === 4 || securityCode.length === 3) {
+                handleCloseModal();
+                sendOrder();
             }
             else {
-                alert('Please enter a valid date');
+                alert('Please enter a valid security code');
             }
         }
         else {
             alert('Please enter a valid card number');
         }
     };
-
-    const isValidDate = () => {
-        if (expirationDate.length !== 5) {
-            return false;
-        }
-        if ((expirationDate[0] === '0' && expirationDate[1] !== '0') || (expirationDate[0] === '1' && expirationDate[1] >= '0' && expirationDate[1] <= '2')) {
-            if (expirationDate.substring(3, 5) >= 23) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     return (
         <form className="billing-form" onSubmit={handleSubmit}>
