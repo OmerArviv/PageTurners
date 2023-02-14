@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import EditBookDetails from "../../components/EditBookDetails/EditBookDetails";
 import BooksChart from "../../components/BooksChart/BooksChart";
 import "./AdminPage.css";
@@ -20,7 +20,7 @@ const AdminPage = () => {
     const [booksByUser, setBooksByUser] = useState(new Map());
 
     useEffect(() => {
-        if(inFirstTab) {
+        if (inFirstTab) {
             axios.get("http://localhost:5000/users/")
                 .then(res => {
                     setUsers(res.data);
@@ -63,7 +63,7 @@ const AdminPage = () => {
     }, [inFirstTab]);
 
     useEffect(() => {
-        if(inFirstTab) {
+        if (inFirstTab) {
             let filtered = books;
 
             if (bookName) {
@@ -117,46 +117,54 @@ const AdminPage = () => {
                 inFirstTab
                     ? <>
                         <div className='booksList-filters'>
-                            <span className='filter-label'>Book</span>
-                            <input className='booksList-filter'
-                                   type="text"
-                                   name="bookName"
-                                   value={bookName}
-                                   onChange={e => setBookName(e.target.value)}
-                            />
-                            <span className='filter-label'>Min profit</span>
-                            <input className='booksList-filter'
-                                   type="text"
-                                   name="minProfit"
-                                   value={minProfit}
-                                   onChange={e => {
-                                       if (!isNaN(e.target.value)) {
-                                           setMinProfit(e.target.value)
-                                       }
-                                   }}
-                            />
-                            <span className='filter-label'>User</span>
-                            <select name="user"
+                            <div className='filter-block'>
+                                <span className='filter-label'>Book</span>
+                                <input className='booksList-filter'
+                                    type="text"
+                                    name="bookName"
+                                    value={bookName}
+                                    onChange={e => setBookName(e.target.value)}
+                                />
+                            </div>
+
+                            <div className='filter-block'>
+                                <span className='filter-label'>Min profit</span>
+                                <input className='booksList-filter'
+                                    type="number"
+                                    name="minProfit"
+                                    value={minProfit}
+                                    onChange={e => {
+                                        if (!isNaN(e.target.value)) {
+                                            setMinProfit(e.target.value)
+                                        }
+                                    }}
+                                />
+                            </div>
+
+                            <div className='filter-block'>
+                                <span className='filter-label'>User</span>
+                                <select className='booksList-filter-select' name="user"
                                     value={user}
                                     onChange={e => setUser(e.target.value)}
-                            >
-                                <option>All</option>
-                                {
-                                    users.map(user =>
-                                        <option key={user.email}>{user.email}</option>
-                                    )
-                                }
-                            </select>
+                                >
+                                    <option>All</option>
+                                    {
+                                        users.map(user =>
+                                            <option key={user.email}>{user.email}</option>
+                                        )
+                                    }
+                                </select>
+                            </div>
                         </div>
                         <div className="books-container">
                             {
                                 filteredBooks.map((book) =>
-                                    <EditBookDetails key={book.image} bookToShow={book}/>
+                                    <EditBookDetails key={book.image} bookToShow={book} />
                                 )
                             }
                         </div>
                     </>
-                    : <BooksChart/>
+                    : <BooksChart />
 
             }
         </div>
