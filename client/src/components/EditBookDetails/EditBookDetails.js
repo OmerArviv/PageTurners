@@ -1,26 +1,13 @@
 import React, {useEffect, useRef, useState} from "react";
-import axios from "axios";
 import "./EditBookDetails.css";
 
 const EditBookDetails = (props) => {
-    const [book, setBook] = useState({});
+    const {bookToShow} = props;
+    const [book, setBook] = useState(bookToShow);
     const [isEditing, setIsEditing] = useState(false);
     const titleInputRef = useRef();
     const authorInputRef = useRef();
     const priceInputRef = useRef();
-
-    const {title} = props;
-
-    useEffect(() => {
-        axios.get(`http://localhost:5000/books/getBook/${title}`)
-            .then(res => {
-                setBook(res.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        // eslint-disable-next-line
-    }, []);
 
     useEffect(() => {
         if (isEditing) {
