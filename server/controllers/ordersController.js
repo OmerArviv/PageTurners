@@ -3,7 +3,7 @@ const Response = require('../config/response');
 
 const getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find().populate('books.prod');
+        const orders = await Order.find().populate(['books.prod', 'user']);
         res.status(200).json(orders);
     }
     catch (err) {
