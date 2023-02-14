@@ -6,7 +6,9 @@ import UserCounter from "./UserCounter";
 const Footer = () => (
     <div className="footer-wrapper bg-light">
         <ul className="list-inline">
-            <Link className="list-inline-item" to={"/"}>Home</Link>
+            <Link className="list-inline-item" to={"/"} onClick={() => {
+                window.scroll(0, 0);
+            }}>Home</Link>
             <Link className="list-inline-item" to={"/about"}>About</Link>
         </ul>
         <UserCounter />

@@ -37,3 +37,7 @@
 .booksList-filter {
     height: fit-content;
 }
+
+.booksList-filter-select {
+    height: 48px;
+}
