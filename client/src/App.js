@@ -12,7 +12,6 @@ import About from './components/About';
 import Footer from './components/Footer';
 import UsedBooks from './pages/UsedBooks/UsedBooks';
 
-
 function App() {
 
   const authCtx = useContext(AuthContext);
